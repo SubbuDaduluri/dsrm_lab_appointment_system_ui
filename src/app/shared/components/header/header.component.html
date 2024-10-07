@@ -1,0 +1,34 @@
+<mat-toolbar class="mat-toolbar mat-elevation-z3 mat-toolbar-single-row">
+    <button (click)="toggleSideNav()" mat-icon-button class="example-icon"
+        aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span><img src="./img/dsrm_tech_labs_main_logo_1.png" alt="BootstrapBrain Logo" width="160" height="45"></span>
+    <span class="fx-spacer"></span>
+    <mat-slide-toggle [checked]="isDarkTheme | async" (change)="toggleDarkTheme($event.checked)">Dark theme</mat-slide-toggle>
+
+    <button mat-icon-button>
+        <mat-icon>notifications</mat-icon>
+      </button>
+      <button mat-icon-button>
+        <mat-icon>email</mat-icon>
+      </button>
+    <button mat-stroked-button [matMenuTriggerFor]="menu" color="primary">
+        <mat-icon>person_pin</mat-icon>
+        <span>Profile</span>
+    </button>
+    <mat-menu #menu="matMenu" class="profile-menu">
+        <button mat-menu-item>
+            <mat-icon>edit</mat-icon>
+            <span>Edit Profile</span>
+        </button>
+        <button mat-menu-item>
+            <mat-icon>settings</mat-icon>
+            <span>Settings</span>
+        </button>
+        <button mat-menu-item (click)="logout()">
+            <mat-icon>power_settings_new</mat-icon>
+            <span>Logout</span>
+        </button>
+    </mat-menu>
+</mat-toolbar>

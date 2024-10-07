@@ -1,0 +1,14 @@
+
+<app-header (sideNavCollapsed)=toggleSideNav($event)/>
+
+<mat-sidenav-container>
+    <mat-sidenav #sidenav mode="side" [opened]="true" [style.width]="sideNavWidth()">
+        <app-custom-sidenav [collapsed]="collapsed()" />
+    </mat-sidenav>
+
+    <mat-sidenav-content class="content dashboard-widgets" [style.margin-left]="sideNavWidth()">
+        <div class="app-body">
+            <router-outlet />
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,44 @@
+.dashboard-widget-content {
+    margin: 0 10px;
+}
+.dashboard-card{
+    padding-top: 15px;
+}
+
+.percentage-difference {
+    margin-top: 1rem;
+    font-size: 11px;
+    color: #A1A1B5;
+}
+
+mat-card {
+    border: 2px solid #b5b4b4 !important;
+}
+
+.info-box-content {
+    padding: 2px 0px 0px 0;
+    margin-left: 40%;
+}
+
+.info-box-icon {
+    float: left;
+}
+
+.progress-description {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 1rem;
+    color: #A1A1B5;
+}
+mat-card-header{
+    padding: 10px 0px 0px 0;
+    margin-left: 42%;
+}
+
+.text-success {
+    color: #448A1D !important;
+}
+.text-danger {
+    color: #CB1B13 !important;
+}

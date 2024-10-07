@@ -1,0 +1,354 @@
+<mat-card class="example-card" appearance="outlined">
+    <mat-card-header>
+        <mat-card-title>Register New Lab</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-divider style="margin-bottom: 20px;"></mat-divider>
+        <mat-stepper linear #stepper labelPosition="bottom">
+            <mat-step [stepControl]="labInformationForm">
+                <form [formGroup]="labInformationForm">
+                    <ng-template matStepLabel>Lab Information
+                    </ng-template>
+                    <h1 class="mat-title-medium">Lab Details</h1>
+                    <mat-divider style="margin-bottom: 20px;"></mat-divider>
+                    <mat-grid-list [cols]="breakpoint" rowHeight="85px" [gutterSize]="'10px'"
+                        (window:resize)="onResize($event)">
+                        <mat-grid-tile [colspan]="2">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Lab Name</mat-label>
+                                <input matInput placeholder="Lab Name" formControlName="labName">
+                                @if ( f['labName'].errors){
+                                    <mat-error>
+                                        <mat-icon matSuffix>info</mat-icon>
+                                        <span class="ms-2" *ngIf="f['labName'].errors['required']">This field is
+                                            mandatory.</span></mat-error>
+                                }
+                            
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Phone Number</mat-label>
+                                <input maxlength="10" matInput placeholder="Phone Number"
+                                    formControlName="contactNumber" numbersOnly>
+                                <span matTextPrefix style="margin-left: -10px !important;">+91 &nbsp;</span>
+                                <mat-icon matPrefix svgIcon="india-flag"></mat-icon>
+                                <mat-error *ngIf="f['contactNumber'].errors">
+                                    <mat-icon>info</mat-icon>
+                                    <span class="ms-2" *ngIf="f['contactNumber'].errors['required']">This field is
+                                        mandatory.</span></mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Email Address</mat-label>
+                                <input matInput placeholder="Email Address" formControlName="emailId">
+                                <mat-error *ngIf="f['emailId'].errors">
+                                    <mat-icon matSuffix>info</mat-icon>
+                                    <span class="ms-2" *ngIf="f['emailId'].errors['required']">This field is
+                                        mandatory.</span>
+                                    <span *ngIf="f['emailId'].errors['email']">Please enter a valid email
+                                        address</span></mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+
+                    <h1 class="mat-title-medium mt-2">Owner Information</h1>
+                    <mat-divider class="mb-4"></mat-divider>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Owner Full Name(First and Last name)</mat-label>
+                        <input maxlength="50" matInput placeholder="Owner Full Name" formControlName="ownerFullName">
+                        <mat-error *ngIf="f['ownerFullName'].errors">
+                            <mat-icon matSuffix>info</mat-icon>
+                            <span class="ms-2" *ngIf="f['ownerFullName'].errors['required']">This field is
+                                mandatory.</span></mat-error>
+                    </mat-form-field>
+                    <section class="check-box-section">
+                        <h1 class="mat-title-medium mt-4">Lab's primary contact number </h1>
+                        <mat-checkbox formControlName="sameAsOwnerNo">Same as lab phone number</mat-checkbox>
+                    </section>
+                    @if(f['sameAsOwnerNo'].value != true){
+                    <mat-form-field appearance="outline">
+                        <mat-label>Owner Phone Number</mat-label>
+                        <span matTextPrefix style="margin-left: -10px !important;">+91 &nbsp;</span>
+                        <mat-icon matPrefix svgIcon="india-flag"></mat-icon>
+                        <input maxlength="10" matInput numbersOnly placeholder="Owner Phone Number"
+                            formControlName="ownerContactNo">
+                        <mat-error *ngIf="f['ownerContactNo'].errors">
+                            <mat-icon matSuffix>info</mat-icon>
+                            <span class="ms-2" *ngIf="f['ownerContactNo'].errors['required']">This field is
+                                mandatory.</span></mat-error>
+                    </mat-form-field>
+                    }
+
+
+                    <app-google-map-picker (addressSelected)="setAddress($event)"
+                        style="width: 100% !important;"></app-google-map-picker>
+                    <h1 class="mat-title-medium mt-4">Enter the co-ordinates</h1>
+                    <mat-divider class="mb-4"></mat-divider>
+                    <mat-grid-list [cols]="2" rowHeight="85px" [gutterSize]="'10px'" (window:resize)="onResize($event)">
+                        <mat-grid-tile>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Enter Latitude</mat-label>
+                                <input maxlength="50" matInput placeholder="Enter Latitude" formControlName="latitude">
+                                <mat-error *ngIf="f['latitude'].errors">
+                                    <mat-icon matSuffix>info</mat-icon>
+                                    <span class="ms-2" *ngIf="f['latitude'].errors['required']">This field is
+                                        mandatory.</span></mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Enter Longitude</mat-label>
+                                <input maxlength="50" matInput placeholder="Enter Longitude"
+                                    formControlName="longitude">
+                                <mat-error *ngIf="f['longitude'].errors">
+                                    <mat-icon matSuffix>info</mat-icon>
+                                    <span class="ms-2" *ngIf="f['longitude'].errors['required']">This field is
+                                        mandatory.</span></mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                    <h1 class="mat-title-medium mt-2">Lab Address Details</h1>
+                    <mat-divider class="mb-4"></mat-divider>
+                    <mat-grid-list [cols]="2" rowHeight="85px" [gutterSize]="'10px'" (window:resize)="onResize($event)">
+                        <mat-grid-tile>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Flat, Building No, Company(Optional) </mat-label>
+                                <input maxlength="120" matInput placeholder="Flat, Building No, Company(Optional)"
+                                    formControlName="addressline1">
+                                <mat-error *ngIf="f['addressline1'].errors">
+                                    <mat-icon matSuffix>info</mat-icon>
+                                    <span class="ms-2" *ngIf="f['addressline1'].errors['required']">This field is
+                                        mandatory.</span></mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Area, Street, Sector</mat-label>
+                                <input maxlength="120" matInput placeholder="Address" formControlName="addressline2">
+                                <mat-error *ngIf="f['addressline2'].errors">
+                                    <mat-icon matSuffix>info</mat-icon>
+                                    <span class="ms-2" *ngIf="f['addressline2'].errors['required']">This field is
+                                        mandatory.</span></mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="2">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Add any nearby landmark (optional)</mat-label>
+                                <input maxlength="60" matInput placeholder="E.g. near apollo hospital"
+                                    formControlName="landmark">
+                                <mat-error *ngIf="f['landmark'].errors">
+                                    <mat-icon matSuffix>info</mat-icon>
+                                    <span class="ms-2" *ngIf="f['landmark'].errors['required']">This field is
+                                        mandatory.</span></mat-error>
+                            </mat-form-field>
+
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Postal Code</mat-label>
+                                <input matInput placeholder="Postal Code" maxlength="6" formControlName="zipCode"
+                                    numbersOnly>
+                                <mat-error *ngIf="f['zipCode'].errors">
+                                    <mat-icon matSuffix>info</mat-icon>
+                                    <span class="ms-2" *ngIf="f['zipCode'].errors['required']">This field is
+                                        mandatory.</span>
+                                    <span class="ms-2" *ngIf="f['zipCode'].errors['pattern']">Please enter a valid ZIP
+                                        or
+                                        postal code. </span>
+                                </mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <mat-form-field appearance="outline">
+                                <mat-label>City</mat-label>
+                                <input maxlength="50" matInput placeholder="City" formControlName="cityName">
+                                <mat-error *ngIf="f['cityName'].errors">
+                                    <mat-icon matSuffix>info</mat-icon>
+                                    <span class="ms-2" *ngIf="f['cityName'].errors['required']">This field is
+                                        mandatory.</span></mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <mat-form-field appearance="outline">
+                                <mat-label>State</mat-label>
+                                <mat-select formControlName="stateCode">
+                                    <mat-option><ngx-mat-select-search [formControl]="filterControlState"
+                                            noEntriesFoundLabel="No entries found" [clearSearchInput]="true"
+                                            placeholderLabel="Find state..."></ngx-mat-select-search>
+                                    </mat-option>
+                                    <mat-option *ngFor="let state of filteredSearch | async "
+                                        [value]="state.code">{{state.name}}</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="f['stateCode'].errors">
+                                    <mat-icon matSuffix>info</mat-icon>
+                                    <span class="ms-2" *ngIf="f['stateCode'].errors['required']">This field is
+                                        mandatory.</span>
+                                </mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Country</mat-label>
+                                <mat-select formControlName="countryCode">
+                                    <mat-option *ngFor="let country of countryList"
+                                        [value]="country.code">{{country.name}}</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="f['countryCode'].errors">
+                                    <mat-icon matSuffix>info</mat-icon>
+                                    <span class="ms-2" *ngIf="f['countryCode'].errors['required']">This field is
+                                        mandatory.</span>
+                                </mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+
+                    <div align="end">
+                        <button class="stepper-next-button" mat-flat-button (click)="nextLabInfoForm()"
+                            matStepperNext>Next</button>
+                    </div>
+                </form>
+            </mat-step>
+            <mat-step label="Upload Images" optional>
+                <h1 class="mat-title-medium">Lab Images</h1>
+                <mat-divider style="margin-bottom: 20px;"></mat-divider>
+                <file-upload-form></file-upload-form>
+                <div class="fx-row">
+                    <button mat-flat-button matStepperPrevious>Back</button>
+                    <button color="primary" (click)="cancel()" mat-button>Cancel</button>
+                    <button *ngIf="isAddMode" color="primary" (click)="createLab()" mat-flat-button>Create Lab</button>
+                    <button *ngIf="!isAddMode" color="primary" (click)="updateLab()" mat-flat-button
+                        matStepperNext>Update</button>
+                </div>
+            </mat-step>
+            <mat-step>
+                <ng-template matStepLabel>Done</ng-template>
+                <p class="mat-body-medium">Lab listing details submitted.</p>
+                <!-- <p>Our team will verify the details and update once your lab is live on DSRM Labs.</p> -->
+                <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <!-- <button mat-button (click)="stepper.reset()">Reset</button> -->
+
+                </div>
+            </mat-step>
+        </mat-stepper>
+
+        <!-- <form [formGroup]="labForm" #labFormSelector="ngForm">
+            <mat-grid-list [cols]="breakpoint" rowHeight="85px" [gutterSize]="'10px'"
+                (window:resize)="onResize($event)">
+                <mat-grid-tile>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Lab Name</mat-label>
+                        <input matInput placeholder="Lab Name" formControlName="labName">
+                        <mat-error *ngIf="f['labName'].errors">
+                            <mat-icon matSuffix>info</mat-icon>
+                            <span class="ms-2" *ngIf="f['labName'].errors['required']">This field is
+                                mandatory.</span></mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Contat Number</mat-label>
+                        <input maxlength="10" matInput placeholder="Contat Number" formControlName="contactNumber">
+                        <mat-error *ngIf="f['contactNumber'].errors">
+                            <mat-icon matSuffix>info</mat-icon>
+                            <span class="ms-2" *ngIf="f['contactNumber'].errors['required']">This field is
+                                mandatory.</span></mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Email ID</mat-label>
+                        <input matInput placeholder="Email ID" formControlName="emailId">
+                        <mat-error *ngIf="f['emailId'].errors">
+                            <mat-icon matSuffix>info</mat-icon>
+                            <span class="ms-2" *ngIf="f['emailId'].errors['required']">This field is
+                                mandatory.</span>
+                            <span *ngIf="f['emailId'].errors['email']">Please enter a valid email
+                                address</span></mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Address</mat-label>
+                        <input maxlength="120" matInput placeholder="Address" formControlName="addressline1">
+                        <mat-error *ngIf="f['addressline1'].errors">
+                            <mat-icon matSuffix>info</mat-icon>
+                            <span class="ms-2" *ngIf="f['addressline1'].errors['required']">This field is
+                                mandatory.</span></mat-error>
+                    </mat-form-field>
+
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Landmark</mat-label>
+                        <input maxlength="60" matInput placeholder="E.g. near apollo hospital"
+                            formControlName="landmark">
+                        <mat-error *ngIf="f['landmark'].errors">
+                            <mat-icon matSuffix>info</mat-icon>
+                            <span class="ms-2" *ngIf="f['landmark'].errors['required']">This field is
+                                mandatory.</span></mat-error>
+                    </mat-form-field>
+
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Postal Code</mat-label>
+                        <input matInput placeholder="Postal Code" formControlName="zipCode">
+                        <mat-error *ngIf="f['zipCode'].errors">
+                            <mat-icon matSuffix>info</mat-icon>
+                            <span class="ms-2" *ngIf="f['zipCode'].errors['required']">This field is
+                                mandatory.</span>
+                            <span class="ms-2" *ngIf="f['zipCode'].errors['pattern']">Please enter a valid ZIP or
+                                postal code. </span>
+                        </mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <mat-form-field appearance="outline">
+                        <mat-label>City</mat-label>
+                        <input maxlength="50" matInput placeholder="City" formControlName="cityName">
+                        <mat-error *ngIf="f['cityName'].errors">
+                            <mat-icon matSuffix>info</mat-icon>
+                            <span class="ms-2" *ngIf="f['cityName'].errors['required']">This field is
+                                mandatory.</span></mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <mat-form-field appearance="outline">
+                        <mat-label>State</mat-label>
+                        <mat-select formControlName="stateCode">
+                            <mat-option><ngx-mat-select-search [formControl]="filterControlState"
+                                    noEntriesFoundLabel="No entries found" [clearSearchInput]="true"
+                                    placeholderLabel="Find state..."></ngx-mat-select-search>
+                            </mat-option>
+                            <mat-option *ngFor="let state of filteredSearch | async "
+                                [value]="state.code">{{state.name}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="f['stateCode'].errors">
+                            <mat-icon matSuffix>info</mat-icon>
+                            <span class="ms-2" *ngIf="f['stateCode'].errors['required']">This field is
+                                mandatory.</span>
+                        </mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Country</mat-label>
+                        <mat-select formControlName="countryCode">
+                            <mat-option *ngFor="let country of countryList"
+                                [value]="country.code">{{country.name}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="f['countryCode'].errors">
+                            <mat-icon matSuffix>info</mat-icon>
+                            <span class="ms-2" *ngIf="f['countryCode'].errors['required']">This field is
+                                mandatory.</span>
+                        </mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </form> -->
+
+    </mat-card-content>
+</mat-card>

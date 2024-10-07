@@ -1,0 +1,16 @@
+<!-- <div class="sidenav-header">
+    <img height="80" width="150" src="/img/dsrm_tech_labs_main_logo_1.png">
+</div> -->
+
+<div class="sidenav-header">
+    <img [height]="profilePicSize()" [width]="profilePicSize()" src="/img/profile_logo.jpeg">
+    <div class="header-text" [class.hide-header-text]="sideNavCollapsed()">
+        <h2>Lab Administrator</h2>
+    </div>
+</div>
+
+<mat-nav-list>
+    @for (item of menuItemsSideNav; track item.label){
+      <app-menu-item [item]="item" [collapsed]="sideNavCollapsed()"/>
+    }
+</mat-nav-list>

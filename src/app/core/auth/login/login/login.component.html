@@ -1,0 +1,52 @@
+<div class="login-main" align="center">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <mat-card class="p-3 p-md-4 p-xl-5 col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
+            <mat-card-title>
+                <div align="center" class="mb-3">
+                    <div layout-align="center center">
+                        <img src="./img/dsrm_tech_labs_main_logo.png" alt="BootstrapBrain Logo" width="200" height="57">
+                    </div>
+                </div>
+                <h2 class="text-secondary mat-body-large mb-3" align="center">Sign in to your account</h2>
+            </mat-card-title>
+            <mat-card-content>
+                <div>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input matInput placeholder="Email" formControlName="username">
+                        <mat-error *ngIf="f['username'].errors">
+                            <mat-icon matSuffix>info</mat-icon>
+                            <span class="ms-2" *ngIf="f['username'].errors['required']">This field is
+                                mandatory.</span>
+                            <span *ngIf="f['username'].errors['email']">Please enter a valid email
+                                address</span></mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Password</mat-label>
+                        <input [type]="hideEyeIcon ? 'password' : 'text'" matInput placeholder="Password"
+                            formControlName="password">
+                        <mat-icon (click)="hideEyeIcon = !hideEyeIcon" matSuffix>{{hideEyeIcon ?
+                            'visibility_off' : 'visibility'}}</mat-icon>
+                        <mat-error *ngIf="f['password'].errors">
+                            <mat-icon matSuffix>info</mat-icon>
+                            <span class="ms-2" *ngIf="f['password'].errors['required']">This field is
+                                mandatory.</span>
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-grid-list cols="2" rowHeight="40px">
+                        <mat-grid-tile> <mat-checkbox class="example-margin">Keep me logged
+                                in</mat-checkbox></mat-grid-tile>
+                        <mat-grid-tile> <a href="#!" class="link-primary text-decoration-none">Forgot
+                                password?</a></mat-grid-tile>
+                    </mat-grid-list>
+                </div>
+
+            </mat-card-content>
+            <mat-card-actions class="mb-3">
+               <button class="login-button" mat-flat-button color="primary">Login</button>
+            </mat-card-actions>
+            <p font-size="1.8rem" >New to DSRM Labs? <span (click)="navigateToPartnetSignUp()" class="sc-iGgWBj create-account-link">Create account</span></p>
+        </mat-card>
+    </form>
+</div>

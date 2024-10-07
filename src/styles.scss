@@ -1,0 +1,193 @@
+@use '@angular/material' as mat;
+
+@use './app/stylesm3-theme.scss';
+
+@use "./spacing";
+
+@include mat.core();
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    --primary-color: #cc0000;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+mat-sidenav-container {
+    height: calc(100vh - 64px);
+    background-color: #EAEDF7 !important;
+}
+
+mat-toolbar {
+    position: relative;
+    z-index: 5;
+}
+
+mat-sidenav {
+    width: 250px;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+mat-sidenav {
+    --mat-sidenav-container-divider-color: rgba(0, 0, 0, .1);
+    --mat-sidenav-container-shape: 0px;
+}
+
+mat-list-item {
+    border-radius: 0px !important;
+}
+
+.content {
+    padding: 24px;
+    box-sizing: border-box;
+}
+
+.app-credits {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+    font-size: .9rem;
+    display: block;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    cursor: move;
+}
+
+.widget-container {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    padding: 32px;
+    box-sizing: border-box;
+    border-radius: inherit;
+    overflow: hidden;
+}
+
+.breadcrumb {
+    padding: 0 .5rem;
+    position: fixed;
+}
+
+.breadcrumb ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.breadcrumb li:not(:last-child)::after {
+    display: inline-block;
+    margin: 0 .25rem;
+    content: "→";
+}
+
+// $mat-primary: (
+//     main: #cc0000,
+//     lighter: #f0b3b3,
+//     darker: #b90000,
+//     200: #cc0000,
+//     contrast: (main: #ffffff,
+//         lighter: #000000,
+//         darker: #ffffff)
+// );
+
+// $theme-primary: mat.m2-define-palette($mat-primary, main, lighter, darker);
+// $theme-accent: mat.m2-define-palette(mat.$m2-indigo-palette, A200, A100, A400);
+
+// $my-theme: mat.m2-define-light-theme((color: (accent:$theme-accent,
+//                 primary:$theme-primary,
+//             ),
+//             typography: (use-system-variables: true,
+//             ),
+//         ));
+
+// @include mat.all-component-themes($my-theme);
+
+
+
+
+
+// html {
+//     // Apply the light theme by default
+//        @include mat.core-theme(stylesm3-theme.$light-theme);
+//       @include mat.button-theme(stylesm3-theme.$light-theme);
+// }
+
+.table-loading-shade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 56px;
+    right: 0;
+    background: rgba(0, 0, 0, 0.15);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+$theme: mat.define-theme((color: (theme-type: dark,
+                primary: mat.$violet-palette,
+            ),
+            typography: (brand-family: 'Comic Sans',
+                bold-weight: 900),
+            density: (scale: -1)));
+
+.my-dark-theme {
+    @include mat.all-component-colors(stylesm3-theme.$dark-theme);
+}
+
+.align-self-start {
+    justify-content: flex-start;
+}
+
+.text-align {
+    text-align: right;
+}
+
+.align-self-end {
+    justify-content: flex-end;
+}
+
+.align-self-center {
+    justify-content: center;
+}
+
+.align-self-baseline {
+    justify-content: baseline;
+}
+
+.align-self-stretch {
+    justify-content: stretch;
+}
+
+.fx-row{
+    display: flex;justify-content: space-between;
+}
+
+.fx-spacer {
+    flex: 1 1 auto !important;
+}
+.mb-8 {
+    margin-bottom: 2rem;
+}
+.mb-8 {
+    margin-bottom: 2rem;
+}
+
+
+body {
+    background-color: #f4f4f4; // Light theme background
+}

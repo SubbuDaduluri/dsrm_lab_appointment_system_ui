@@ -1,0 +1,19 @@
+<div class="grid-container">
+    <mat-grid-list [gridCols]="{xs: 1, sm: 2, md: 2, lg: 4, xl: 4}" rowHeight="170px" gutterSize="5px">
+        <mat-grid-tile *ngFor="let widget of widgetCards" class="">
+            <app-widget class="widget-card"
+                [widgetData]="widget"></app-widget>
+        </mat-grid-tile>
+    </mat-grid-list>
+    <mat-grid-list [gridCols]="{xs: 1, sm: 1, md: 2, lg: 2, xl: 2}" rowHeight="350px" gutterSize="5px">
+        <mat-grid-tile *ngFor="let chartWidget of widgetChartGrids">
+
+            @if(chartWidget.chartTpe =='doughnutChart'){
+                <app-doughnut [chartWidget]="chartWidget" class="widget-card"></app-doughnut>
+            }
+            @if(chartWidget.chartTpe =='multiLineChart'){
+                <app-multi-axis-line-chart [chartWidget]="chartWidget" class="widget-card"></app-multi-axis-line-chart>
+            }
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>

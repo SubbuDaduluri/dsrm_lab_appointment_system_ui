@@ -1,0 +1,40 @@
+<mat-card appearance="outlined">
+    <mat-card-content>
+
+        <h5 class="mat-title-medium">Please place the pin accurately at your location on the map</h5>
+        <div>
+            <mat-form-field appearance="outline">
+                <mat-label>Search your location</mat-label>
+                <input matInput type="text" [(ngModel)]="formattedAddress" #searchPlace>
+                @if (formattedAddress) {
+                <button matSuffix mat-icon-button aria-label="Clear" (click)="formattedAddress=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+                }
+                <button matSuffix mat-icon-button (click)="pickMapLocation()">
+                    <mat-icon>gps_fixed</mat-icon>
+                </button>
+            </mat-form-field>
+
+        </div>
+
+        <div class="google_map_container">
+            <google-map [zoom]="mapZoom" [center]="mapCenter" [options]="mapOptions" height="200px">
+                <!-- <map-marker #marker="mapMarker" [position]="mapCenter" [options]="markerOptions"
+                    (mapClick)="openInfoWindow(marker)" (mapDragend)="onMapDragEnd($any($event))"
+                    [label]="markerLabel">
+                </map-marker> -->
+
+                <map-advanced-marker #markerElem="mapAdvancedMarker"
+                [options]="advancedMarkerOptions"
+                (mapClick)="openInfoWindow(markerElem)"
+                [position]="mapCenter" (mapDragend)="onMapDragEnd($any($event))">
+            </map-advanced-marker>
+                <map-info-window>{{ markerInfoContent }}</map-info-window>
+            </google-map>
+        </div>
+        <h2 class="mat-title-large mt-3 mb-3">{{ formattedAddress }}</h2>
+        <h4 class="mat-label-large" style="text-align: center; padding: 20px;">or Directly enter the coordinates</h4>
+
+    </mat-card-content>
+</mat-card>

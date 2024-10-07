@@ -1,0 +1,73 @@
+<mat-card appearance="outlined">
+    <mat-card-header>
+        <mat-card-title>
+            <span class="mat-title-large">All Labs</span>
+        </mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-divider style="margin-bottom: 20px;"></mat-divider>
+
+        <div class="text-align" style="margin-bottom: 20px;">
+            <button (click)="createLab()" mat-flat-button>Create Lab</button>
+        </div>
+        <mat-form-field>
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Ex. LAB-24.." #input>
+        </mat-form-field>
+        <section class="example-container mat-elevation-z8" tabindex="0">
+
+            @if (isLoadingResults) {
+            <div class="table-loading-shade">
+                @if (isLoadingResults) {
+                <mat-spinner></mat-spinner>
+                }
+            </div>
+            }
+
+            <table mat-table [dataSource]="dataSource">
+
+                <ng-container matColumnDef="seqId">
+                    <th mat-header-cell *matHeaderCellDef> #. </th>
+                    <td mat-cell *matCellDef="let element"> {{element.seqId}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="labName">
+                    <th mat-header-cell *matHeaderCellDef> Lab Name </th>
+                    <td mat-cell *matCellDef="let element"> {{element.labName}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="labAddress">
+                    <th mat-header-cell *matHeaderCellDef> Lab Address </th>
+                    <td mat-cell *matCellDef="let element"> {{element.addressline1}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="contactNumber">
+                    <th mat-header-cell *matHeaderCellDef> Contact Number </th>
+                    <td mat-cell *matCellDef="let element"> {{element.contactNumber}} </td>
+                </ng-container>
+                <ng-container matColumnDef="emailAddress">
+                    <th mat-header-cell *matHeaderCellDef> Email Address</th>
+                    <td mat-cell *matCellDef="let element"> {{element.emailId}} </td>
+                </ng-container>
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef> Actions </th>
+                    <td mat-cell *matCellDef="let element">
+                        <div class="d-inline-flex gap-1">
+                            <button mat-mini-fab (click)="editLabDetails(element)">
+                                <mat-icon>launch</mat-icon>
+                            </button>
+                        </div>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: false"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </section>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+            aria-label="Select page of periodic elements">
+        </mat-paginator>
+
+    </mat-card-content>
+</mat-card>
